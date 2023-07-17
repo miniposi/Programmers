@@ -1,0 +1,26 @@
+import java.util.Arrays;
+import java.util.HashMap;
+
+class Solution {
+    public String[] solution(String[] players, String[] callings) {
+        HashMap<String, Integer> hash = new HashMap<String, Integer>();
+        int cnt = 0;
+        for (String player : players) {
+            hash.put(player, cnt++);
+        }
+        
+        int idx;
+        String prevPlayer;
+        for(String player : callings) {
+            idx = hash.get(player);
+            prevPlayer = players[idx-1];
+            hash.put(player, idx-1);
+            hash.put(prevPlayer, idx);
+            
+            players[idx-1] = players[idx];
+            players[idx] = prevPlayer;
+        }
+
+        return players;
+    }
+}
